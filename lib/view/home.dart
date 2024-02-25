@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/constants/colors.dart';
 import 'package:note_app/models/note.dart';
-import 'package:note_app/screens/edit.dart';
+import 'package:note_app/view/edit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,10 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return notes;
   }
 
-  getRandomColor() {
-    Random random = Random();
-    return backgroundColors[random.nextInt(backgroundColors.length)];
-  }
+
 
   void onSearchTextChanged(String searchText) {
     setState(() {
@@ -58,20 +56,28 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
         child: Column(
+
+
           children: [
-            Row(
+
+
+          Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
                 const Text(
-                  'Notes',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  'Shvaha',
+                  style: TextStyle(fontSize: 30, color: Colors.black,fontWeight:FontWeight.bold),
                 ),
                 IconButton(
                     onPressed: () {
@@ -98,24 +104,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             TextField(
               onChanged: onSearchTextChanged,
-              style: const TextStyle(fontSize: 16, color: Colors.white),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 hintText: "Search notes...",
-                hintStyle: const TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.black),
                 prefixIcon: const Icon(
                   Icons.search,
-                  color: Colors.grey,
+                  color: Colors.blue,
                 ),
-                fillColor: Colors.grey.shade800,
+                fillColor: Color(0xffEBE8FC),
+
                 filled: true,
+
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderSide: const BorderSide(color: Colors.grey),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(40),
+                  borderSide: const BorderSide(color: Colors.black),
                 ),
               ),
             ),
@@ -127,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 return Card(
                   margin: const EdgeInsets.only(bottom: 20),
-                  color: getRandomColor(),
+                  color: Color(0xFFE6F9FF),
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
@@ -189,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(
                               fontSize: 10,
                               fontStyle: FontStyle.italic,
-                              color: Colors.grey.shade800),
+                              color: Colors.black),
                         ),
                       ),
                       trailing: IconButton(
@@ -232,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         elevation: 10,
-        backgroundColor: Colors.grey.shade800,
+        backgroundColor: const Color(0xFFF5E6CC),
         child: const Icon(
           Icons.add,
           size: 38,
@@ -246,14 +254,14 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.grey.shade900,
+            backgroundColor: Colors.white,
             icon: const Icon(
               Icons.info,
               color: Colors.grey,
             ),
             title: const Text(
               'Are you sure you want to delete?',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
             content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,18 +1,37 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:note_app/screens/home.dart';
+import 'package:note_app/view/home.dart';
+import 'package:note_app/view/Register_screen.dart';
+import 'package:note_app/view/login_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 
+
+
+
+
+
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      initialRoute: '/register',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/register': (context) => SignupPage(),
+        '/login': (context) => LoginPage(),
+      },
     );
   }
 }
